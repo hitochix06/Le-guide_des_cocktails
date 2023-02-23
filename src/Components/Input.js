@@ -1,17 +1,17 @@
 import { Form, Button, Card } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, } from "react";
 import '../Style/Input.css';
-import ViewCocktail from './ViewCocktail';
-
+import ViewCocktail from "./ViewCocktail";
 
 function Input(props) {
- const [cocktails, setLike] = useState(0);
+ const [cocktails, setCocktails] = useState(0);
  const [cocktailData, setCocktailData] = useState([]);
  const [error, setError] = useState(false);
 
+
  // FONCTION
  const handleInput = (e) => {
-  setLike(e.target.value);
+  setCocktails(e.target.value);
  };
 
  //code pour appelle les item sur BD
@@ -24,6 +24,7 @@ function Input(props) {
   if (data.drinks) {
    setCocktailData(data.drinks);
    setError(false);
+
   } else {
    setError(true);
   }
@@ -56,10 +57,11 @@ function Input(props) {
      </Button>
     </Form.Group>
    </Card>
+
    {error ? (
     <p className="text-center">Aucun résultat trouvé.</p>
    ) : (
-    <ViewCocktail cocktailData={cocktailData} />
+    < ViewCocktail cocktailData={cocktailData} />
    )}
   </div>
  );

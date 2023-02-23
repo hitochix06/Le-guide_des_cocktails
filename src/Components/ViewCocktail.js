@@ -1,7 +1,7 @@
 import { Card, ListGroup } from "react-bootstrap";
 
 function ViewCocktail(props) {
- 
+
  return (
   <div className="card-container d-flex flex-wrap justify-content-center">
    {props.cocktailData.map((cocktail) => (
