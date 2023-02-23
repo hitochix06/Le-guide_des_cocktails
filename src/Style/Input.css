@@ -13,3 +13,8 @@
   border-bottom-width: 0;
   font-size: 20px;
 }
+
+.list-group-flush {
+  border-radius: 0;
+  color: black;
+}

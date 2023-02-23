@@ -54,11 +54,15 @@ function Input(props) {
        <Card.Body>
         <Card.Title>{cocktail.strDrink}</Card.Title>
         <ListGroup variant="flush">
-         <ListGroup.Item>{cocktail.strInstructions}
-
-
-
-
+        <strong>Ingrédients :</strong> {cocktail.strIngredient1},{" "}
+                      {cocktail.strIngredient2},{" "}
+                      {cocktail.strIngredient3},{" "}
+                      {cocktail.strIngredient4},{" "}
+                      {cocktail.strIngredient5},{" "}
+                      {cocktail.strIngredient6},{" "}
+                      {cocktail.strIngredient7},{" "}
+         <ListGroup.Item>
+          {cocktail.strInstructions}
          </ListGroup.Item>
         </ListGroup>
        </Card.Body>
