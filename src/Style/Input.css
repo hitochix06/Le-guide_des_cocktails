@@ -1,0 +1,15 @@
+.affiche {
+  width: 30rem;
+  margin: 10px;
+}
+
+.h5 {
+  color: black;
+  font-size: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.list-group-flush > .list-group-item:last-child {
+  border-bottom-width: 0;
+  font-size: 20px;
+}
