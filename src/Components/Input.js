@@ -1,11 +1,13 @@
-import { Form, Button, Card, ListGroup } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import '../Style/Input.css';
+import ViewCocktail from './ViewCocktail';
+
 
 function Input(props) {
  const [cocktails, setLike] = useState(0);
  const [cocktailData, setCocktailData] = useState([]);
- const [errorMessage, setErrorMessage] = useState("");
+ const [error, setError] = useState(false);
 
  // FONCTION
  const handleInput = (e) => {
@@ -20,11 +22,10 @@ function Input(props) {
   );
   let data = await response.json();
   if (data.drinks) {
-    setCocktailData(data.drinks);
-    setErrorMessage("");
+   setCocktailData(data.drinks);
+   setError(false);
   } else {
-    setCocktailData([]);
-    setErrorMessage("Aucun résultat trouvé.");
+   setError(true);
   }
  }
 
@@ -34,8 +35,7 @@ function Input(props) {
   promise();
  }, []);
 
- useEffect(() => {
- }, [cocktails]);
+ useEffect(() => { }, [cocktails]);
 
  return (
   <div>
@@ -47,39 +47,20 @@ function Input(props) {
       type="Text"
       placeholder="Nom d'un cocktail"
      />
-     <Button className="boutonValide" variant="outline-primary" onClick={promise}>
+     <Button
+      className="boutonValide"
+      variant="outline-primary"
+      onClick={promise}
+     >
       Recherche
      </Button>
     </Form.Group>
    </Card>
-
-   <div>
-    <div className="card-container d-flex flex-wrap justify-content-center">
-     {cocktailData.length === 0 && errorMessage && (
-       <h3>{errorMessage}</h3>
-     )}
-     {cocktailData.map((cocktail) => (
-      <Card className="text-center affiche">
-       <Card.Img variant="top" src={cocktail.strDrinkThumb} />
-       <Card.Body>
-        <Card.Title>{cocktail.strDrink}</Card.Title>
-        <ListGroup variant="flush">
-         <strong>Ingrédients :</strong> {cocktail.strIngredient1},{" "}
-         {cocktail.strIngredient2},{" "}
-         {cocktail.strIngredient3},{" "}
-         {cocktail.strIngredient4},{" "}
-         {cocktail.strIngredient5},{" "}
-         {cocktail.strIngredient6},{" "}
-         {cocktail.strIngredient7},{" "}
-         <ListGroup.Item>
-          {cocktail.strInstructions}
-         </ListGroup.Item>
-        </ListGroup>
-       </Card.Body>
-      </Card>
-     ))}
-    </div>
-   </div>
+   {error ? (
+    <p className="text-center">Aucun résultat trouvé.</p>
+   ) : (
+    <ViewCocktail cocktailData={cocktailData} />
+   )}
   </div>
  );
 }

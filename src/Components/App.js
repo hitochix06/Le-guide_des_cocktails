@@ -1,7 +1,7 @@
 import '../Style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Input from '../Components/Input';
-// import ViewCocktail from './ViewCocktail';
+import ViewCocktail from './ViewCocktail';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Input />
-     
+        <ViewCocktail/>
       </header>
     </div>
   );
