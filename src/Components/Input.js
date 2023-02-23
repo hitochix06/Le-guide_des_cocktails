@@ -5,6 +5,7 @@ import '../Style/Input.css';
 function Input(props) {
  const [cocktails, setLike] = useState(0);
  const [cocktailData, setCocktailData] = useState([]);
+ const [errorMessage, setErrorMessage] = useState("");
 
  // FONCTION
  const handleInput = (e) => {
@@ -18,7 +19,13 @@ function Input(props) {
    "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktails
   );
   let data = await response.json();
-  setCocktailData(data.drinks);
+  if (data.drinks) {
+    setCocktailData(data.drinks);
+    setErrorMessage("");
+  } else {
+    setCocktailData([]);
+    setErrorMessage("Aucun résultat trouvé.");
+  }
  }
 
  // USE EFFECT
@@ -48,19 +55,22 @@ function Input(props) {
 
    <div>
     <div className="card-container d-flex flex-wrap justify-content-center">
+     {cocktailData.length === 0 && errorMessage && (
+       <h3>{errorMessage}</h3>
+     )}
      {cocktailData.map((cocktail) => (
       <Card className="text-center affiche">
        <Card.Img variant="top" src={cocktail.strDrinkThumb} />
        <Card.Body>
         <Card.Title>{cocktail.strDrink}</Card.Title>
         <ListGroup variant="flush">
-        <strong>Ingrédients :</strong> {cocktail.strIngredient1},{" "}
-                      {cocktail.strIngredient2},{" "}
-                      {cocktail.strIngredient3},{" "}
-                      {cocktail.strIngredient4},{" "}
-                      {cocktail.strIngredient5},{" "}
-                      {cocktail.strIngredient6},{" "}
-                      {cocktail.strIngredient7},{" "}
+         <strong>Ingrédients :</strong> {cocktail.strIngredient1},{" "}
+         {cocktail.strIngredient2},{" "}
+         {cocktail.strIngredient3},{" "}
+         {cocktail.strIngredient4},{" "}
+         {cocktail.strIngredient5},{" "}
+         {cocktail.strIngredient6},{" "}
+         {cocktail.strIngredient7},{" "}
          <ListGroup.Item>
           {cocktail.strInstructions}
          </ListGroup.Item>
@@ -70,8 +80,6 @@ function Input(props) {
      ))}
     </div>
    </div>
-
-
   </div>
  );
 }
